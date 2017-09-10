@@ -13,10 +13,13 @@ import static com.apress.gerber.jisuanqi.R.drawable.bu;
 public class MainActivity extends AppCompatActivity {
 
     String frist_str ;
-    double frist_num ;
+    boolean havefrist_num;
+    Double frist_num ;
     String operator ;
-    double next_num ;
+    Double next_num ;
     boolean havepoint ;
+    boolean op_equal;
+    boolean pressed_eque;
     Button bnn_op;
     Button bn;
     TextView num_tv;
@@ -37,7 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
                 Button bnn =bn;
                 public void onClick(View view) {
-
+                    if(pressed_eque)
+                    {
+                        ini();
+                        pressed_eque =false;
+                    }
+                    op_equal = false;
                     bnn_op.setBackground(getDrawable(R.drawable.defin));
                     String str = bnn.getText().toString();
                     if(!str.equals(".")) {  //点击数字
@@ -98,18 +106,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        for(int i=0;i<4;i++)
+        for(int i=0;i<4;i++)//加减乘除
         {
             bn =(Button) findViewById(button_op[i]);
             bn.setOnClickListener(new View.OnClickListener() {
 
                 Button bnn = bn;
                 public void onClick(View view) {
+                    pressed_eque =false;
+                    if(!op_equal)
+                    {
+                        equal();
+                        op_equal=true;
+                    }
                     bnn_op.setBackground(getDrawable(R.drawable.defin));
                     bnn_op =bnn;
                     operator = bnn_op.getText().toString();
                     bnn_op.setBackground(getDrawable(R.drawable.bu));
-                    frist_num =Double.valueOf(frist_str).doubleValue();
+                    if(!havefrist_num) {
+                        frist_num =Double.valueOf(frist_str).doubleValue();
+                        havefrist_num =true;
+                    }
                     frist_str="0";
                 }
             });
@@ -119,13 +136,21 @@ public class MainActivity extends AppCompatActivity {
         bn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            equal();
+                op_equal =false;
+                if(pressed_eque)
+                {
+                    frist_str = next_num.toString();
+                }
+                pressed_eque = true;
+                equal();
+                frist_str="0";
             }
         });
     }
 
     void equal()
     {
+        String enser;
         Double e = null;
         next_num = Double.valueOf(frist_str).doubleValue();
         switch (operator)
@@ -144,9 +169,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         frist_num = e;
-        frist_str = e.toString();
+        enser = e.toString();
+        if(enser.substring(enser.length()-2,enser.length()).equals(".0"))
+            enser = enser.substring(0,enser.length()-2);
+
         autoSettext_size();
-        num_tv.setText(frist_str);
+        num_tv.setText(enser);
     }
 
     void autoSettext_size()
@@ -162,11 +190,14 @@ public class MainActivity extends AppCompatActivity {
     void ini()
     {
         frist_str="0";
-        frist_num=0;
+        frist_num=0.0;
         operator = "+";
-        next_num =0;
+        next_num =0.0;
         havepoint =false;
         bnn_op=(Button) findViewById(R.id.buttonNum除);
+        op_equal=false;
+        havefrist_num = false;
+        pressed_eque = false;
     }
 
 
