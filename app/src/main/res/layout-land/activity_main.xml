@@ -549,7 +549,7 @@
         android:textAllCaps="false"/>
 
     <Button
-        android:id="@+id/buttonπ"
+        android:id="@+id/buttonPI"
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_column="4"
@@ -567,7 +567,7 @@
         android:layout_column="5"
         android:layout_columnWeight="1"
         android:layout_row="5"
-        android:text="rand"
+        android:text="Rand"
         android:textSize="20dp"
         android:background="@color/LightGrey"
         android:textAllCaps="false"/>

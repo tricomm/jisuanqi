@@ -1,32 +1,45 @@
 package com.apress.gerber.jisuanqi;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import static com.apress.gerber.jisuanqi.R.drawable.bu;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
-    String frist_str ;
-    boolean havefrist_num;
+    final Double e =2.718281828459045;
+    final Double PI = 3.141592653589793;
+
+    String str_num ;
     Double frist_num ;
     String operator ;
     Double next_num ;
-    boolean havepoint ;
-    boolean op_equal;
-    boolean pressed_eque;
     Button bnn_op;
     Button bn;
     TextView num_tv;
-    int button[] ={R.id.buttonNum0,R.id.buttonNum1,R.id.buttonNum2,R.id.buttonNum3,R.id.buttonNum4,R.id.buttonNum5,R.id.buttonNum6,
-                    R.id.buttonNum7,R.id.buttonNum8,R.id.buttonNum9,R.id.buttonNumPoint};
-    int button_op[] ={R.id.buttonNum除,R.id.buttonNumx,R.id.buttonNum减,R.id.buttonNumplus};
+
+    boolean havefrist_num;  //状态信号量
+    boolean havepoint ;
+    boolean op_equal;
+    boolean pressed_eque;
+    boolean find_BUG;
+
+    int button_date1[] ={R.id.buttonNum0,R.id.buttonNum1,R.id.buttonNum2,R.id.buttonNum3,R.id.buttonNum4,R.id.buttonNum5,R.id.buttonNum6,
+                    R.id.buttonNum7,R.id.buttonNum8,R.id.buttonNum9,R.id.buttonNumPoint,};
+    int button_date2[] ={R.id.buttone,R.id.buttonPI,R.id.buttonrand};
+
+    int button_one_op2[]={R.id.buttonNum百分号,R.id.button3sqrtx,R.id.buttonEx,R.id.button10x,R.id.buttonX2,R.id.buttonX3};
+    int button_one_op3[]={R.id.buttonx65321,R.id.buttonln,R.id.buttonlog10,R.id.button1x,R.id.button2sqrtx};
+
+    int button_two_op[] ={R.id.buttonNum除,R.id.buttonNumx,R.id.buttonNum减,R.id.buttonNumplus};
 
     public boolean isPortrait()
     {
@@ -46,8 +59,9 @@ public class MainActivity extends AppCompatActivity {
         ini();
         num_tv = (TextView)findViewById(R.id.numtext);
 
-        for(int i=0;i<11;i++) { //数字部分
-            bn = (Button) findViewById(button[i]);
+
+        for(int i=0;i<button_date1.length;i++) { //date1数字及小数点部分
+            bn = (Button) findViewById(button_date1[i]);
             bn.setOnClickListener(new View.OnClickListener() {
 
                 Button bnn =bn;
@@ -55,76 +69,197 @@ public class MainActivity extends AppCompatActivity {
                     if(pressed_eque)
                     {
                         ini();
-                        pressed_eque =false;
                     }
                     op_equal = false;
                     bnn_op.setBackground(getDrawable(R.drawable.defin));
                     String str = bnn.getText().toString();
                     if(!str.equals(".")) {  //点击数字
-                        if (frist_str.equals("0") && !str.equals("0"))
-                            frist_str = str;    //当前为零则替换
-                        else if (!(frist_str.equals("0") && str.equals("0")))
-                            frist_str += str;
+                        if (str_num.equals("0") && !str.equals("0"))
+                            str_num = str;    //当前为零则替换
+                        else if (!(str_num.equals("0") && str.equals("0")))
+                            str_num += str;
                     }
                     else    //点击小数点
                     {
                         if(!havepoint)
                         {
                             havepoint = true;
-                            frist_str+=str;
+                            str_num+=str;
                         }
 
                     }
                     autoSettext_size();
-                    num_tv.setText(frist_str);
+                    num_tv.setText(str_num);
 
                 }
             });
         }
 
-        bn = (Button) findViewById(R.id.buttonNumAC);
+
+        for(int i=0 ; i<button_date2.length;i++)  //date2 约定数字及随机数
+        {
+            bn = (Button) findViewById(button_date2[i]);
+            bn.setOnClickListener(new View.OnClickListener() {
+                Button bnn =bn;
+                public void onClick(View view) {
+                    switch (bnn.getText().toString()){
+
+                        case "e":
+                            str_num = "2.718281828459045";
+                            break;
+                        case "π":
+                            str_num = "3.141592653589793";
+                            break;
+                        case "Rand":
+                            java.util.Random r = new java.util.Random();
+                            Double Randomstr = r.nextDouble();
+                            Randomstr = Randomstr%1;
+                            str_num = Randomstr.toString();
+                            break;
+                    }
+
+                    num_tv.setText(str_num);
+
+                }
+            });
+        }
+
+
+
+        bn = (Button) findViewById(R.id.buttonNum加减); //+/-
+        bn.setOnClickListener(new View.OnClickListener() {//+-
+            public void onClick(View view) {
+                if(str_num.charAt(0)=='-')
+                    str_num = "+"+str_num.substring(1,str_num.length());
+                else if (str_num.charAt(0)=='+')
+                    str_num = "-"+str_num.substring(1,str_num.length());
+                else
+                    str_num = "-"+str_num;
+                autoSettext_size();
+                num_tv.setText(str_num);
+            }
+        });
+
+
+        for(int i=0;i<button_one_op2.length;i++)    //一元二类运算符
+        {
+            bn = (Button) findViewById(button_one_op2[i]);
+            bn.setOnClickListener(new View.OnClickListener() {
+                Button bnn = bn;
+                public void onClick(View view) {
+                    Double dd =Double.valueOf(str_num).doubleValue();
+                    switch (bnn.getText().toString())
+                    {
+                        case "%":
+                            dd = dd*0.01;
+                            break;
+                        case "³√x":
+                            dd = Math.pow(dd,1/3.0);
+                            break;
+                        case "e^x":
+                            dd = Math.pow(e,dd);
+                            break;
+                        case "10^x":
+                            dd = Math.pow(10,dd);
+                            break;
+                        case "X²":
+                            dd = Math.pow(dd,2);
+                            break;
+                        case "X³":
+                            dd = Math.pow(dd,3);
+                            break;
+
+                    }
+                    str_num = dd.toString();
+                    autoSettext_size();
+                    num_tv.setText(str_num);
+                }
+            });
+        }
+
+        for(int i=0 ;i<button_one_op3.length;i++)   //一元三类
+        {
+            bn = (Button) findViewById(button_one_op2[i]);
+            bn.setOnClickListener(new View.OnClickListener() {
+                Button bnn =bn;
+                public void onClick(View view) {
+                    Double dd = Double.valueOf(str_num);
+                    final Double eps = 1e-10;
+                    switch (bnn.getText().toString())
+                    {
+                        case "x!":
+                            if(dd-(double)dd.intValue() < eps)
+                                str_num = "不可为小数";
+                            else {
+                                int id =1;
+                                for(int i=1; i<=dd.intValue() ;i++)
+                                    id *=i;
+                                dd = (double) id;
+                                str_num = dd.toString();
+                            }
+                            break;
+                        case "ln":
+                            if(dd-(double)0<eps)
+                                str_num = "不可为负数";
+                            else {
+                                dd = Math.log(dd) / Math.log(e);
+                                str_num = dd.toString();
+                            }
+                            break;
+                        case "log₁₀":
+                            if(dd-(double)0<eps)
+                                str_num = "不可为负数";
+                            else{
+                                dd = Math.log(dd);
+                                str_num = dd.toString();
+                            }
+                            break;
+                        case "1/x":
+                            if(Math.abs(dd-(double)0)<eps)
+                                str_num = "不可为零";
+                            else {
+                                dd = Math.pow(dd, -1);
+                                str_num = dd.toString();
+                            }
+                            break;
+                        case "²√x":
+                        if(dd-(double)0<eps)
+                            str_num = "不可为负数";
+                            else {
+                            dd = Math.sqrt(dd);
+                            str_num = dd.toString();
+                        }
+
+
+                    }
+                    num_tv.setText(str_num);
+                }
+            });
+        }
+
+
+
+        bn = (Button) findViewById(R.id.buttonNumAC); //AC
         bn.setOnClickListener(new View.OnClickListener() { //AC
             @Override
             public void onClick(View view) {
                 ini();
                 autoSettext_size();
-                num_tv.setText(frist_str);
-            }
-        });
-        bn = (Button) findViewById(R.id.buttonNum加减);
-        bn.setOnClickListener(new View.OnClickListener() {//+-
-            @Override
-            public void onClick(View view) {
-                if(frist_str.charAt(0)=='-')
-                    frist_str = "+"+frist_str.substring(1,frist_str.length());
-                else if (frist_str.charAt(0)=='+')
-                    frist_str = "-"+frist_str.substring(1,frist_str.length());
-                else
-                    frist_str = "-"+frist_str;
-                autoSettext_size();
-                num_tv.setText(frist_str);
+                num_tv.setText(str_num);
             }
         });
 
-        bn = (Button) findViewById(R.id.buttonNum百分号);
-        bn.setOnClickListener(new View.OnClickListener() {//百分号
-            @Override
-            public void onClick(View view) {
-                Double dd = Double.valueOf(frist_str).doubleValue();
-                dd = dd*0.01;
-                frist_str = dd.toString();
-                autoSettext_size();
-                num_tv.setText(frist_str);
-            }
-        });
 
-        for(int i=0;i<4;i++)//加减乘除
+
+
+        for(int i=0;i<button_two_op.length;i++)//加减乘除
         {
-            bn =(Button) findViewById(button_op[i]);
+            bn =(Button) findViewById(button_two_op[i]);
             bn.setOnClickListener(new View.OnClickListener() {
 
                 Button bnn = bn;
                 public void onClick(View view) {
+                    havepoint = false;
                     pressed_eque =false;
                     if(!op_equal)
                     {
@@ -136,35 +271,36 @@ public class MainActivity extends AppCompatActivity {
                     operator = bnn_op.getText().toString();
                     bnn_op.setBackground(getDrawable(R.drawable.bu));
                     if(!havefrist_num) {
-                        frist_num =Double.valueOf(frist_str).doubleValue();
+                        frist_num =Double.valueOf(str_num).doubleValue();
                         havefrist_num =true;
                     }
-                    frist_str="0";
+                    str_num="0";
                 }
             });
         }
 
-        bn = (Button) findViewById(R.id.buttonNumEqual);
+        bn = (Button) findViewById(R.id.buttonNumEqual); //=
         bn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 op_equal =false;
                 if(pressed_eque)
                 {
-                    frist_str = next_num.toString();
+                    str_num = next_num.toString();
                 }
                 pressed_eque = true;
                 equal();
-                frist_str="0";
+                str_num="0";
             }
         });
+
     }
 
     void equal()
     {
         String enser;
         Double e = null;
-        next_num = Double.valueOf(frist_str).doubleValue();
+        next_num = Double.valueOf(str_num).doubleValue();
         switch (operator)
         {
             case ("÷"):
@@ -192,16 +328,16 @@ public class MainActivity extends AppCompatActivity {
     void autoSettext_size()
     {
         if(isPortrait()) {//竖屏
-            if (frist_str.length() > 7) {
-                float ts = (float) (700 / (float) frist_str.length());
+            if (str_num.length() > 7) {
+                float ts = (float) (700 / (float) str_num.length());
                 num_tv.setTextSize(ts);
             }
             else
                 num_tv.setTextSize(100);
         }
         else {
-            if(frist_str.length() > 20){
-                float ts = (float) (1800 / (float) frist_str.length());
+            if(str_num.length() > 20){
+                float ts = (float) (1800 / (float) str_num.length());
             }
             else
                 num_tv.setTextSize(60);
@@ -209,17 +345,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     void ini()
     {
-        frist_str="0";
+        str_num="0";
         frist_num=0.0;
         operator = "+";
         next_num =0.0;
-        havepoint =false;
+
         bnn_op=(Button) findViewById(R.id.buttonNum除);
+        havepoint =false;
         op_equal=false;
         havefrist_num = false;
         pressed_eque = false;
+        find_BUG =false;
     }
 
 
