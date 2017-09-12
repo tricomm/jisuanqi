@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/gridLayout"
     android:layout_width="match_parent"
-    android:layout_height="630dp"
+    android:layout_height="match_parent"
     android:columnCount="4"
     android:rowCount="6"
     tools:layout_editor_absoluteX="8dp"
@@ -15,14 +15,14 @@
     <TextView
         android:id="@+id/numtext"
         android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_columnWeight="1"
+        android:layout_height="165dp"
         android:layout_column="0"
         android:layout_columnSpan="4"
+        android:layout_columnWeight="1"
         android:layout_row="0"
-        android:textSize="90dp"
+        android:gravity="bottom|right"
         android:text="0"
-        android:gravity="right"/>
+        android:textSize="100dp" />
 
     <Button
         android:id="@+id/buttonNumAC"

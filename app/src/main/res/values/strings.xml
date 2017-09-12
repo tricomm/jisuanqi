@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">jisuanqi</string>
+    <string name="bnTxetSize_land">90dp</string>
 </resources>

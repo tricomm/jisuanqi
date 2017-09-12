@@ -1,6 +1,7 @@
 package com.apress.gerber.jisuanqi;
 
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,17 @@ public class MainActivity extends AppCompatActivity {
                     R.id.buttonNum7,R.id.buttonNum8,R.id.buttonNum9,R.id.buttonNumPoint};
     int button_op[] ={R.id.buttonNum除,R.id.buttonNumx,R.id.buttonNum减,R.id.buttonNumplus};
 
+    public boolean isPortrait()
+    {
+        Configuration configuration = this.getResources().getConfiguration(); //获取设备信息
+        int LorP = configuration.orientation;
+
+        if(LorP == configuration.ORIENTATION_PORTRAIT)
+            return true;
+        else
+            return false;
+
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,12 +191,22 @@ public class MainActivity extends AppCompatActivity {
 
     void autoSettext_size()
     {
-        if(frist_str.length()>8)
-        {float ts = (float) (720.0/ (float)frist_str.length());
-            num_tv.setTextSize(ts);
+        if(isPortrait()) {//竖屏
+            if (frist_str.length() > 7) {
+                float ts = (float) (700 / (float) frist_str.length());
+                num_tv.setTextSize(ts);
+            }
+            else
+                num_tv.setTextSize(100);
         }
-        else
-            num_tv.setTextSize(90);
+        else {
+            if(frist_str.length() > 20){
+                float ts = (float) (1800 / (float) frist_str.length());
+            }
+            else
+                num_tv.setTextSize(60);
+
+        }
 
     }
     void ini()
