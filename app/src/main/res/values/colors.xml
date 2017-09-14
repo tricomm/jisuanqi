@@ -3,9 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="orgin">#ff9100</color>
-    <color name="horgin">#fbff8800</color>
-    <color name="WhiteSmoke">#dedede</color>
-    <color name="LightGrey">#d0d0d0</color>
+    <color name="orgin">#f46f1b</color>
+    <color name="horgin">#d86819</color>
+    <color name="WhiteSmoke">#bec1c3</color>
+    <color name="hWhitesmoke">#b5b6b8</color>
+    <color name="LightGrey">#bbbcbf</color>
+    <color name="hlightGrey">#a4a5a6</color>
     <color name="White">#ffffff</color>
 </resources>

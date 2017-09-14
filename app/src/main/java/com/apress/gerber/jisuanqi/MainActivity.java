@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
     final Double e = 2.718281828459045;
     final Double PI = 3.141592653589793;
     final Double eps = 1e-10;
+    final Double max = Double.MAX_VALUE;
 
     String str_num;
     Double frist_num;
@@ -83,6 +84,7 @@ public class MainActivity extends Activity {
                             bnn_op.setBackground(getDrawable(R.drawable.graydefin));
                         else
                             bnn_op.setBackground(getDrawable(R.drawable.defin));
+                        bnn_op =null;
                     }
 
                     String str = bnn.getText().toString();
@@ -388,7 +390,7 @@ public class MainActivity extends Activity {
 
         for (int i = 0; i < button_two_op.length; i++)//二元运算符
         {
-            if(i>2 && isPortrait()) //竖屏判断
+            if(i>3 && isPortrait()) //竖屏判断
                 break;
             bn = findViewById(button_two_op[i]);
             bn.setOnClickListener(new View.OnClickListener() {
@@ -479,6 +481,8 @@ public class MainActivity extends Activity {
             bn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(stack.isEmpty())
+                        return;
                     equal();
                     next_num = frist_num;
                     str_num = frist_num.toString();
@@ -499,6 +503,8 @@ public class MainActivity extends Activity {
 
         for(int i=0;i<button_m.length ;i++)
         {
+            if(isPortrait())
+                break;
             bn = (Button) findViewById(button_m[i]);
             bn.setOnClickListener(new View.OnClickListener() {
                 Button bnn = bn;
@@ -578,6 +584,10 @@ public class MainActivity extends Activity {
 
 
     void autoSettext_size() {
+        double dd = Double.valueOf(str_num).doubleValue();
+        if(Math.abs(dd-(double)(int)dd)<eps)
+            str_num =String.valueOf((int)dd);
+
         if (isPortrait()) {//竖屏
             if (str_num.length() > 7) {
                 float ts = 700 / (float) str_num.length();

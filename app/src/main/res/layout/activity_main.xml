@@ -34,7 +34,7 @@
         android:layout_row="1"
         android:text="AC"
         android:textSize="30dp"
-        android:background="@drawable/graydefin"
+        android:background="@drawable/graybutton"
 
 
         />
@@ -48,7 +48,7 @@
         android:layout_row="1"
         android:text="+/-"
         android:textSize="30dp"
-        android:background="@drawable/graydefin"
+        android:background="@drawable/graybutton"
         />
 
     <Button
@@ -60,7 +60,7 @@
         android:layout_row="1"
         android:text="%"
         android:textSize="30dp"
-        android:background="@drawable/graydefin"
+        android:background="@drawable/graybutton"
         />
 
     <Button
@@ -70,7 +70,7 @@
         android:layout_column="3"
         android:layout_columnWeight="1"
         android:layout_row="1"
-        android:background="@drawable/defin"
+        android:background="@drawable/orangebutton"
         android:text="÷"
         android:textSize="30dp"
         android:textColor="@color/White"/>
@@ -83,7 +83,7 @@
         android:layout_column="0"
         android:layout_columnWeight="1"
         android:layout_row="2"
-        android:background="@drawable/whitedefin"
+        android:background="@drawable/whitebutton"
         android:text="7"
         android:textSize="30dp" />
 
@@ -96,7 +96,7 @@
         android:layout_row="2"
         android:text="8"
         android:textSize="30dp"
-        android:background="@drawable/whitedefin" />
+        android:background="@drawable/whitebutton" />
 
     <Button
         android:id="@+id/buttonNum9"
@@ -107,7 +107,7 @@
         android:layout_row="2"
         android:text="9"
         android:textSize="30dp"
-        android:background="@drawable/whitedefin" />
+        android:background="@drawable/whitebutton" />
 
     <Button
         android:id="@+id/buttonNumx"
@@ -116,7 +116,7 @@
         android:layout_column="3"
         android:layout_columnWeight="1"
         android:layout_row="2"
-        android:background="@drawable/defin"
+        android:background="@drawable/orangebutton"
         android:text="×"
         android:textSize="30dp"
         android:textColor="@color/White"/>
@@ -131,7 +131,7 @@
         android:layout_row="3"
         android:text="4"
         android:textSize="30dp"
-        android:background="@drawable/whitedefin" />
+        android:background="@drawable/whitebutton" />
 
     <Button
         android:id="@+id/buttonNum5"
@@ -142,7 +142,7 @@
         android:layout_row="3"
         android:text="5"
         android:textSize="30dp"
-        android:background="@drawable/whitedefin" />
+        android:background="@drawable/whitebutton" />
 
     <Button
         android:id="@+id/buttonNum6"
@@ -153,7 +153,7 @@
         android:layout_row="3"
         android:text="6"
         android:textSize="30dp"
-        android:background="@drawable/whitedefin" />
+        android:background="@drawable/whitebutton" />
 
     <Button
         android:id="@+id/buttonNum减"
@@ -162,7 +162,7 @@
         android:layout_column="3"
         android:layout_columnWeight="1"
         android:layout_row="3"
-        android:background="@drawable/defin"
+        android:background="@drawable/orangebutton"
         android:text="—"
         android:textSize="30dp"
         android:textColor="@color/White"/>
@@ -177,7 +177,7 @@
         android:layout_row="4"
         android:text="1"
         android:textSize="30dp"
-        android:background="@drawable/whitedefin" />
+        android:background="@drawable/whitebutton" />
 
     <Button
         android:id="@+id/buttonNum2"
@@ -188,7 +188,7 @@
         android:layout_row="4"
         android:text="2"
         android:textSize="30dp"
-        android:background="@drawable/whitedefin" />
+        android:background="@drawable/whitebutton" />
 
     <Button
         android:id="@+id/buttonNum3"
@@ -199,7 +199,7 @@
         android:layout_row="4"
         android:text="3"
         android:textSize="30dp"
-        android:background="@drawable/whitedefin" />
+        android:background="@drawable/whitebutton" />
 
     <Button
         android:id="@+id/buttonNumplus"
@@ -208,7 +208,7 @@
         android:layout_column="3"
         android:layout_columnWeight="1"
         android:layout_row="4"
-        android:background="@drawable/defin"
+        android:background="@drawable/orangebutton"
         android:text="+"
         android:textSize="30dp"
         android:textColor="@color/White"/>
@@ -224,7 +224,7 @@
         android:layout_row="5"
         android:text="0"
         android:textSize="30dp"
-        android:background="@drawable/whitedefin" />
+        android:background="@drawable/whitebutton" />
 
     <Button
         android:id="@+id/buttonNumPoint"
@@ -235,7 +235,7 @@
         android:layout_row="5"
         android:text="."
         android:textSize="30dp"
-        android:background="@drawable/whitedefin" />
+        android:background="@drawable/whitebutton" />
 
     <Button
         android:id="@+id/buttonNumEqual"
@@ -244,7 +244,7 @@
         android:layout_column="3"
         android:layout_columnWeight="1"
         android:layout_row="5"
-        android:background="@drawable/defin"
+        android:background="@drawable/orangebutton"
         android:text="="
         android:textSize="30dp"
         android:textColor="@color/White"/>
