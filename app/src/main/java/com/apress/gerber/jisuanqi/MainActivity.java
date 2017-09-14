@@ -522,7 +522,7 @@ public class MainActivity extends Activity {
                             {
                                 Double dd = frist_num;
                                 dd *= -1;
-                                mr = dd.toString();
+                                mr = dd.toString();//
                             }
                             else {
                                 Double dd = Double.valueOf(str_num.toString()).doubleValue();
