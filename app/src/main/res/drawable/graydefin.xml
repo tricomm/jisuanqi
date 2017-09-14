@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <stroke android:width="0.2dp" android:color="#ff000000" /><!-- 描边，边框宽度、颜色 -->
-    <solid android:color="@color/orgin"></solid>
+    <solid android:color="@color/LightGrey"></solid>
 </shape>
