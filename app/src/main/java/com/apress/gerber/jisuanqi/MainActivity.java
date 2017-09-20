@@ -585,7 +585,7 @@ public class MainActivity extends Activity {
 
     void autoSettext_size() {
         double dd = Double.valueOf(str_num).doubleValue();
-        if(Math.abs(dd-(double)(int)dd)<eps)
+        if(str_num.charAt(str_num.length()-1)!='.' && Math.abs(dd-(double)(int)(dd+0.5))<eps)
             str_num =String.valueOf((int)dd);
 
         if (isPortrait()) {//竖屏
@@ -602,6 +602,12 @@ public class MainActivity extends Activity {
                 num_tv.setTextSize(60);
 
         }
+
+    }
+
+    void show()
+    {
+        String ss;
 
     }
 
